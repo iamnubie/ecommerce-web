@@ -35,7 +35,7 @@
         <!-- first child -->
         <nav class="navbar navbar-expand-lg navbar-light bg-info">
             <div class="container-fluid">
-                <img src="../images/logo.jpg" alt="" class="logo">
+                <img src="../images/logo.png" alt="" class="logo">
                 <nav class="navbar navbar-expand-lg">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -76,7 +76,7 @@
         </div>
 
         <!-- fourth child -->
-         <div class="container my-5">
+         <div class="container my-3">
             <?php 
             if(isset($_GET['insert_category'])){
                 include('insert_categories.php');
