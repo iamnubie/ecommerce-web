@@ -1,6 +1,7 @@
 <!-- connect file -->
 <?php
 include('includes/connect.php');
+include('functions/common_function.php');
 ?>
 
 <!DOCTYPE html>
@@ -77,81 +78,24 @@ include('includes/connect.php');
 <!-- third chile -->
 <div class="bg-light my-3">
     <h3 class="text-center">Mong Linh Store</h3>
-    <p class="text-center">Kiến Thức - Kinh Nghiệm - Trải Nghiệm</p>
+    <p class="text-center">Lắng Nghe - Kiên Trì - Đổi Mới</p>
 </div>
 
 <!-- fourth child -->
- <div class="row">
+ <div class="row px-1">
     <div class="col-md-10">
         <!-- products -->
          <div class="row">
-            <div class="col-md-4 mb-2">
-            <div class="card" >
-  <img src="./images/ban1.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-info">Thêm vào giỏ</a>
-    <a href="#" class="btn btn-secondary">Chi tiết</a>
-  </div>
+          <!-- fetching products -->
+          <?php
+          //calling function
+            getproducts();
+            get_unique_categories();
+            get_unique_brands();
+          ?>
+<!-- row end -->
 </div>
-            </div>
-            <div class="col-md-4 mb-2">
-            <div class="card" >
-  <img src="./images/ban2.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-info">Thêm vào giỏ</a>
-    <a href="#" class="btn btn-secondary">Chi tiết</a>
-  </div>
-</div>
-            </div>
-            <div class="col-md-4 mb-2">
-            <div class="card" >
-  <img src="./images/den1.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-info">Thêm vào giỏ</a>
-    <a href="#" class="btn btn-secondary">Chi tiết</a>
-  </div>
-</div>
-            </div>
-             <div class="col-md-4 mb-2">
-            <div class="card" >
-  <img src="./images/den2.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-info">Thêm vào giỏ</a>
-    <a href="#" class="btn btn-secondary">Chi tiết</a>
-  </div>
-</div>
-            </div>
-            <div class="col-md-4 mb-2">
-            <div class="card" >
-  <img src="./images/ban3.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-info">Thêm vào giỏ</a>
-    <a href="#" class="btn btn-secondary">Chi tiết</a>
-  </div>
-</div>
-         </div>
-         <div class="col-md-4 mb-2">
-            <div class="card" >
-  <img src="./images/den3.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-info">Thêm vào giỏ</a>
-    <a href="#" class="btn btn-secondary">Chi tiết</a>
-  </div>
-</div>
-    </div>
-</div>
+<!-- col end -->
 </div>
     <div class="col-md-2 bg-secondary p-0">
       <!-- brands to be displayed -->
@@ -160,18 +104,7 @@ include('includes/connect.php');
             <a href="#" class="nav-link text-light"><h4>Thương Hiệu</h4></a>
           </li>
           <?php
-          $select_brands="Select * from `brands`";
-          $result_brands=mysqli_query($con,$select_brands);
-          // $row_data=mysqli_fetch_assoc($result_brands);
-          // echo $row_data['brand_title'];
-          while($row_data=mysqli_fetch_assoc($result_brands)){
-            $brand_title=$row_data['brand_title'];
-            $brand_id=$row_data['brand_id'];
-            echo "
-              <li class='nav-item'>
-                <a href='index.php?brand=$brand_id' class='nav-link text-light'>$brand_title</a>
-              </li>";
-          }
+            getbrands();
           ?>
         </ul>
 
@@ -181,18 +114,7 @@ include('includes/connect.php');
             <a href="#" class="nav-link text-light"><h4>Mục Hàng</h4></a>
           </li>
           <?php
-          $select_categories="Select * from `categories`";
-          $result_categories=mysqli_query($con,$select_categories);
-          // $row_data=mysqli_fetch_assoc($result_brands);
-          // echo $row_data['brand_title'];
-          while($row_data=mysqli_fetch_assoc($result_categories)){
-            $category_title=$row_data['category_title'];
-            $category_id=$row_data['category_id'];
-            echo "
-              <li class='nav-item'>
-                <a href='index.php?category=$category_id' class='nav-link text-light'>$category_title</a>
-              </li>";
-          }
+            getcategories();
           ?>
         </ul>
     </div>
