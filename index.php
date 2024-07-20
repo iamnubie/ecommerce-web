@@ -76,7 +76,7 @@ include('includes/connect.php');
 
 <!-- third chile -->
 <div class="bg-light my-3">
-    <h3 class="text-center">Thái Công Store</h3>
+    <h3 class="text-center">Mong Linh Store</h3>
     <p class="text-center">Kiến Thức - Kinh Nghiệm - Trải Nghiệm</p>
 </div>
 
