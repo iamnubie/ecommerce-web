@@ -87,15 +87,13 @@ include('functions/common_function.php');
  <div class="row px-1">
     <div class="col-md-10">
         <!-- products -->
-         <div class="row">
+        <div class="row">
           <!-- fetching products -->
           <?php
           //calling function
-            getproducts();
+            view_details();
             get_unique_categories();
             get_unique_brands();
-            // $ip = getIPAddress();  
-            // echo 'User Real IP Address - '.$ip; 
           ?>
 <!-- row end -->
 </div>

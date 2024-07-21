@@ -37,10 +37,10 @@ include('functions/common_function.php');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="display_all.php">Sản phẩm</a>
+          <a class="nav-link" href="#">Sản phẩm</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Đăng ký</a>
@@ -55,7 +55,7 @@ include('functions/common_function.php');
           <a class="nav-link" href="#">Tổng tiền:100/-</a>
         </li>
       </ul>
-      <form class="d-flex" action="search_product.php" method="get">
+      <form class="d-flex" action="" method="get">
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm" 
         aria-label="Search" name="search_data">
         <input type="submit" value="Tìm Kiếm" class="btn btn-outline-light"
@@ -91,11 +91,9 @@ include('functions/common_function.php');
           <!-- fetching products -->
           <?php
           //calling function
-            getproducts();
+            search_product();
             get_unique_categories();
             get_unique_brands();
-            // $ip = getIPAddress();  
-            // echo 'User Real IP Address - '.$ip; 
           ?>
 <!-- row end -->
 </div>
@@ -126,8 +124,9 @@ include('functions/common_function.php');
 
 
 <!-- last child -->
-<!-- include footer -->
- <?php include("./includes/footer.php") ?>
+ <div class="bg-info p-3 text-center">
+    <p>All rights reserved © Designed by Group-2 2024</p>
+ </div>
      </div>
 
 <!-- boostrap js link -->
@@ -135,4 +134,4 @@ include('functions/common_function.php');
 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
 crossorigin="anonymous"></script>
 </body>
-</html>
+</html>                                                                             
