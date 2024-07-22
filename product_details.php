@@ -37,7 +37,7 @@ include('functions/common_function.php');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+          <a class="nav-link active" aria-current="page" href="index.php">Trang chủ</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="display_all.php">Sản phẩm</a>
@@ -49,10 +49,12 @@ include('functions/common_function.php');
           <a class="nav-link" href="#">Liên hệ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-solid fa-cart-plus"></i><sup>1</sup></a>
+          <a class="nav-link" href="#"><i class="fa-solid fa-cart-plus"></i><sup>
+            <?php cart_item();?>
+          </sup></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Tổng tiền:100/-</a>
+          <a class="nav-link" href="#">Tổng tiền: <?php total_cart_price();?><sup>đ</sup>/-</a>
         </li>
       </ul>
       <form class="d-flex" action="search_product.php" method="get">
@@ -64,6 +66,11 @@ include('functions/common_function.php');
     </div>
   </div>
 </nav>
+
+<!-- calling cart function -->
+<?php
+  cart();
+ ?>
 
 <!-- second child -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
