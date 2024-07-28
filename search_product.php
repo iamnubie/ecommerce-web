@@ -2,6 +2,7 @@
 <?php
 include('includes/connect.php');
 include('functions/common_function.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -43,13 +44,13 @@ include('functions/common_function.php');
           <a class="nav-link" href="#">Sản phẩm</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Đăng ký</a>
+          <a class="nav-link" href="./users_area/user_register.php">Đăng ký</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Liên hệ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-solid fa-cart-plus"></i><sup>
+          <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-plus"></i><sup>
             <?php cart_item();?>
           </sup></a>
         </li>
@@ -75,12 +76,26 @@ include('functions/common_function.php');
 <!-- second child -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
 <ul class="navbar-nav me-auto">
-<li class="nav-item">
-          <a class="nav-link" href="#">Chào Mừng Bạn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Đăng Nhập</a>
-        </li>
+        <?php
+        if(!isset($_SESSION['username'])){
+          echo "<li class='nav-item'>
+                  <a class='nav-link' href='#'>Chào Mừng Bạn</a>
+                </li>";
+        }else{
+          echo "<li class='nav-item'>
+                <a class='nav-link' href='#'>Chào Mừng ".$_SESSION['username']."</a>
+                </li>";
+        }
+        if(!isset($_SESSION['username'])){
+          echo "<li class='nav-item'>
+                <a class='nav-link' href='./users_area/user_login.php'>Đăng Nhập</a>
+                </li>";
+        }else{
+          echo "<li class='nav-item'>
+                <a class='nav-link' href='./users_area/logout.php'>Đăng Xuất</a>
+                </li>";
+        }
+        ?>
 </ul>
 </nav>
 

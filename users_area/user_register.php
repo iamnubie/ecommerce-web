@@ -1,3 +1,8 @@
+<?php
+include('../includes/connect.php');
+include('../functions/common_function.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +17,8 @@
 </head>
 <body>
     <div class="container-fluid my-3">
-        <h2 class="text-center">Đăng Ký Tài Khoản</h2>
-        <div class="row d-flex align-items-center justify-content-center">
+        <h2 class="text-center">Đăng Nhập Tài Khoản</h2>
+        <div class="row d-flex align-items-center justify-content-center mt-5">
             <div class="col-lg-12 col-xl-6">
                 <form action="" method="post" 
                 enctype="multipart/form-data">
@@ -86,3 +91,53 @@
     </div>
 </body>
 </html>
+
+<!-- php code -->
+ <?php
+if(isset($_POST['user_register'])){
+    $user_username=$_POST['user_username'];
+    $user_email=$_POST['user_email'];
+    $user_password=$_POST['user_password'];
+    $hash_password=password_hash($user_password,PASSWORD_DEFAULT);
+    $conf_user_password=$_POST['conf_user_password'];
+    $user_address=$_POST['user_address'];
+    $user_contact=$_POST['user_contact'];
+    $user_image=$_FILES['user_image']['name'];
+    $user_image_tmp=$_FILES['user_image']['tmp_name'];
+    $user_ip=getIPAddress();
+
+    //select query
+    $select_query="SELECT * FROM `user_table` where username='$user_username' or
+    user_email='$user_email'";
+    $result=mysqli_query($con,$select_query);
+    $rows_count=mysqli_num_rows($result);
+    if($rows_count>0){
+        echo "<script>alert('Tên Đăng Nhập hoặc Email đã tồn tại.')</script>";
+    }else if($user_password!=$conf_user_password){
+        echo "<script>alert('Mật khẩu không khớp!')</script>";
+    }
+    
+    else{
+    //insert query
+    move_uploaded_file($user_image_tmp,"./user_images/$user_image");
+    $insert_query="insert into `user_table` (username,user_email,
+    user_password,user_image,user_ip,user_address,user_mobile) values 
+    ('$user_username','$user_email','$hash_password','$user_image',
+    '$user_ip','$user_address','$user_contact')";
+    $sql_execute=mysqli_query($con,$insert_query);
+
+    }
+    //chon sp trong gio hang
+    $select_cart_items="SELECT * FROM `cart_details` where ip_address='$user_ip'";
+    $result_cart=mysqli_query($con,$select_cart_items);
+    $rows_count=mysqli_num_rows($result_cart);
+    if($rows_count>0){
+        $_SESSION['username']=$user_username;
+        echo "<script>alert('Bạn đang có sản phẩm trong giỏ.')</script>";
+        echo "<script>window.open('checkout.php','_self')</script>";
+    }else{
+        echo "<script>window.open('../index.php','_self')</script>";
+    }
+
+}
+ ?>

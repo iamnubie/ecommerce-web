@@ -1,6 +1,7 @@
 <!-- connect file -->
 <?php
-include('includes/connect.php');
+include('../includes/connect.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -36,13 +37,13 @@ include('includes/connect.php');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Trang chủ</a>
+          <a class="nav-link active" aria-current="page" href="../index.php">Trang chủ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="display_all.php">Sản phẩm</a>
+          <a class="nav-link" href="../display_all.php">Sản phẩm</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Đăng ký</a>
+          <a class="nav-link" href="user_register.php">Đăng ký</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Liên hệ</a>
@@ -61,12 +62,26 @@ include('includes/connect.php');
 <!-- second child -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
 <ul class="navbar-nav me-auto">
-<li class="nav-item">
-          <a class="nav-link" href="#">Chào Mừng Bạn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Đăng Nhập</a>
-        </li>
+        <?php
+        if(!isset($_SESSION['username'])){
+          echo "<li class='nav-item'>
+                  <a class='nav-link' href='#'>Chào Mừng Bạn</a>
+                </li>";
+        }else{
+          echo "<li class='nav-item'>
+                <a class='nav-link' href='#'>Chào Mừng ".$_SESSION['username']."</a>
+                </li>";
+        }
+        if(!isset($_SESSION['username'])){
+          echo "<li class='nav-item'>
+                <a class='nav-link' href='./user_login.php'>Đăng Nhập</a>
+                </li>";
+        }else{
+          echo "<li class='nav-item'>
+                <a class='nav-link' href='logout.php'>Đăng Xuất</a>
+                </li>";
+        }
+        ?>
 </ul>
 </nav>
 
@@ -83,7 +98,7 @@ include('includes/connect.php');
         <div class="row">
             <?php
             if(!isset($_SESSION['username'])){
-                include('users_area/user_login.php');
+                include('user_login.php');
             }else{
                 include('payment.php');
             }
@@ -99,7 +114,7 @@ include('includes/connect.php');
 
 <!-- last child -->
 <!-- include footer -->
- <?php include("./includes/footer.php") ?>
+ <?php include("../includes/footer.php") ?>
      </div>
 
 <!-- boostrap js link -->
