@@ -21,8 +21,9 @@ session_start();
      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
      crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-     <!-- css file -->
-      <link rel="stylesheet" href="style.css">
+    <!-- css file -->
+    <link rel="stylesheet" href="../style.css">
+
 </head>
 <body>
     <!-- navbar -->
@@ -30,7 +31,7 @@ session_start();
         <!-- first child -->
         <nav class="navbar navbar-expand-lg navbar-light bg-info">
   <div class="container-fluid">
-    <img src="./images/logo.png" alt="" class="logo">
+    <img src="../images/logo.png" alt="" class="logo">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
