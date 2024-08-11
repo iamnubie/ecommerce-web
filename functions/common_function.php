@@ -1,6 +1,6 @@
 <?php
 //include connect file
-include('./includes/connect.php');
+// include('./includes/connect.php');
 
 //getting products
 function getproducts(){
@@ -18,16 +18,19 @@ function getproducts(){
     $product_title=$row['product_title'];
     $product_description=$row['product_description'];
     $product_image1=$row['product_image1'];
-    $product_price=$row['product_price'];
+    $product_price = number_format($row['product_price'], 0, ',', '.');
     $category_id=$row['category_id'];
     $brand_id=$row['brand_id'];
     echo "    <div class='col-md-4 mb-2'>
               <div class='card' >
-              <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='$product_title'>
+              <img src='./admin_area/product_images/$product_image1' 
+              class='card-img-top' alt='$product_title'>
               <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
-              <a href='#' class='btn btn-info'>Thêm vào giỏ</a>
+              <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+              <a href='index.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Thêm vào giỏ</a>
               <a href='product_details.php?product_id=$product_id' 
               class='btn btn-secondary'>Xem thêm</a>
             </div>
@@ -54,18 +57,21 @@ function get_all_products(){
   $product_title=$row['product_title'];
   $product_description=$row['product_description'];
   $product_image1=$row['product_image1'];
-  $product_price=$row['product_price'];
+  $product_price = number_format($row['product_price'], 0, ',', '.');
   $category_id=$row['category_id'];
   $brand_id=$row['brand_id'];
   echo "    <div class='col-md-4 mb-2'>
             <div class='card' >
-            <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='$product_title'>
+            <img src='./admin_area/product_images/$product_image1' 
+              class='card-img-top' alt='$product_title'>
             <div class='card-body'>
             <h5 class='card-title'>$product_title</h5>
             <p class='card-text'>$product_description</p>
-            <a href='#' class='btn btn-info'>Thêm vào giỏ</a>
+            <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+            <a href='index.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Thêm vào giỏ</a>
             <a href='product_details.php?product_id=$product_id' 
-            class='btn btn-secondary'>Xem thêm</a>
+              class='btn btn-secondary'>Xem thêm</a>
           </div>
         </div>
       </div>";
@@ -92,18 +98,21 @@ function get_unique_categories(){
     $product_title=$row['product_title'];
     $product_description=$row['product_description'];
     $product_image1=$row['product_image1'];
-    $product_price=$row['product_price'];
+    $product_price = number_format($row['product_price'], 0, ',', '.');
     $category_id=$row['category_id'];
     $brand_id=$row['brand_id'];
     echo "    <div class='col-md-4 mb-2'>
               <div class='card' >
-              <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='$product_title'>
+              <img src='./admin_area/product_images/$product_image1' 
+                class='card-img-top' alt='$product_title'>
               <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
-              <a href='#' class='btn btn-info'>Thêm vào giỏ</a>
+              <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+              <a href='index.php?add_to_cart=$product_id' 
+                class='btn btn-info'>Thêm vào giỏ</a>
               <a href='product_details.php?product_id=$product_id' 
-              class='btn btn-secondary'>Xem thêm</a>
+                class='btn btn-secondary'>Xem thêm</a>
             </div>
           </div>
         </div>";
@@ -129,18 +138,21 @@ function get_unique_brands(){
     $product_title=$row['product_title'];
     $product_description=$row['product_description'];
     $product_image1=$row['product_image1'];
-    $product_price=$row['product_price'];
+    $product_price = number_format($row['product_price'], 0, ',', '.');
     $category_id=$row['category_id'];
     $brand_id=$row['brand_id'];
     echo "    <div class='col-md-4 mb-2'>
               <div class='card' >
-              <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='$product_title'>
+              <img src='./admin_area/product_images/$product_image1' 
+                class='card-img-top' alt='$product_title'>
               <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
-              <a href='#' class='btn btn-info'>Thêm vào giỏ</a>
+              <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+              <a href='index.php?add_to_cart=$product_id' 
+                class='btn btn-info'>Thêm vào giỏ</a>
               <a href='product_details.php?product_id=$product_id' 
-              class='btn btn-secondary'>Xem thêm</a>
+                class='btn btn-secondary'>Xem thêm</a>
             </div>
           </div>
         </div>";
@@ -195,17 +207,20 @@ function search_product(){
   $product_title=$row['product_title'];
   $product_description=$row['product_description'];
   $product_image1=$row['product_image1'];
-  $product_price=$row['product_price'];
+  $product_price = number_format($row['product_price'], 0, ',', '.');
   $category_id=$row['category_id'];
   $brand_id=$row['brand_id'];
   echo "    <div class='col-md-4 mb-2'>
             <div class='card' >
-            <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='$product_title'>
+            <img src='./admin_area/product_images/$product_image1' 
+              class='card-img-top' alt='$product_title'>
             <div class='card-body'>
             <h5 class='card-title'>$product_title</h5>
             <p class='card-text'>$product_description</p>
-            <a href='#' class='btn btn-info'>Thêm vào giỏ</a>
-              <a href='product_details.php?product_id=$product_id' 
+            <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+            <a href='index.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Thêm vào giỏ</a>
+            <a href='product_details.php?product_id=$product_id' 
               class='btn btn-secondary'>Xem thêm</a>
           </div>
         </div>
@@ -231,36 +246,39 @@ function view_details(){
   $product_description=$row['product_description'];
   $product_image1=$row['product_image1'];
   $product_image2=$row['product_image2'];
-  $product_price=$row['product_price'];
+  $product_price = number_format($row['product_price'], 0, ',', '.');
   $category_id=$row['category_id'];
   $brand_id=$row['brand_id'];
   echo "    <div class='col-md-4 mb-2'>
             <div class='card' >
-            <img src='./admin_area/product_images/$product_image1' class='card-img-top' alt='$product_title'>
+            <img src='./admin_area/product_images/$product_image1' 
+              class='card-img-top' alt='$product_title'>
             <div class='card-body'>
             <h5 class='card-title'>$product_title</h5>
             <p class='card-text'>$product_description</p>
-            <a href='#' class='btn btn-info'>Thêm vào giỏ</a>
-            <a href='product_details.php?product_id=$product_id' 
-            class='btn btn-secondary'>Xem thêm</a>
+            <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+            <a href='index.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Thêm vào giỏ</a>
+            <a href='index.php' 
+              class='btn btn-secondary'>Về trang chủ</a>
           </div>
         </div>
       </div>
       
-            <div class='col-md-8'>
-                <!-- show image -->
-                 <div class='row'>
-                    <div class='col-md-12'>
-                        <h4 class='text-center text-info mb-5'>Sản phẩm cùng loại</h4>
-                    </div>
-                    <div class='col-md-12'>
-                    <img src='./admin_area/product_images/$product_image2' class='card-img-top' alt='$product_title'>
-                    </div>
-                    <!-- <div class='col-md-6'>
-                    <img src='images/den3.jpg' class='card-img-top' alt='$product_title'>
-                    </div> -->
-                 </div>
-            </div>
+      <div class='col-md-8'>
+          <!-- show image -->
+           <div class='row'>
+              <div class='col-md-12'>
+                  <h4 class='text-center text-info mb-5'>Sản phẩm cùng loại</h4>
+              </div>
+              <div class='col-md-12'>
+              <img src='./admin_area/product_images/$product_image2' class='card-img-top' alt='$product_title'>
+              </div>
+              <!-- <div class='col-md-6'>
+               <img src='images/den3.jpg' class='card-img-top' alt='$product_title'>
+              </div> -->
+           </div>
+      </div>
       ";
       }
   }
@@ -287,4 +305,98 @@ function getIPAddress() {
 // $ip = getIPAddress();  
 // echo 'User Real IP Address - '.$ip; 
 
+//cart function
+function cart(){
+  if(isset($_GET['add_to_cart'])){
+    global $con;
+    $get_ip_add = getIPAddress();
+    $get_product_id=$_GET['add_to_cart'];
+    $select_query="SELECT * FROM `cart_details` where ip_address='$get_ip_add' 
+    and product_id=$get_product_id";
+    $result_query=mysqli_query($con,$select_query);
+    $num_of_rows=mysqli_num_rows($result_query);
+    if($num_of_rows>0){
+      echo "<script>alert('Sản phẩm đã có trong giỏ hàng')</script>";
+      echo "<script>window.open('index.php','_self')</script>";
+    }else{
+      $insert_query="insert into `cart_details` (product_id, ip_address, 
+      quantity) values ($get_product_id,'$get_ip_add',0)";
+      $result_query=mysqli_query($con,$insert_query);
+      echo "<script>alert('Sản phẩm đã thêm vào giỏ hàng')</script>";
+      echo "<script>window.open('index.php','_self')</script>";
+
+    }
+  }
+}
+
+//function lay so luong san pham tu gio hang
+function cart_item(){
+  if(isset($_GET['add_to_cart'])){
+    global $con;
+    $get_ip_add = getIPAddress();
+    $select_query="SELECT * FROM `cart_details` where ip_address='$get_ip_add'";
+    $result_query=mysqli_query($con,$select_query);
+    $count_cart_items=mysqli_num_rows($result_query);
+    }else{
+    global $con;
+    $get_ip_add = getIPAddress();
+    $select_query="SELECT * FROM `cart_details` where ip_address='$get_ip_add'";
+    $result_query=mysqli_query($con,$select_query);
+    $count_cart_items=mysqli_num_rows($result_query);
+  }
+  echo $count_cart_items;
+}
+
+//total price function
+function total_cart_price(){
+  global $con;
+  $get_ip_add = getIPAddress();
+  $total_price=0;
+  $cart_query="SELECT * FROM `cart_details` where ip_address='$get_ip_add'";
+  $result_query=mysqli_query($con,$cart_query);
+  while($row=mysqli_fetch_array($result_query)){
+    $product_id=$row['product_id'];
+    $select_products="SELECT * FROM `products` where product_id='$product_id'";
+    $result_products=mysqli_query($con,$select_products);
+    while($row_product_price=mysqli_fetch_array($result_products)){
+      $product_price=array($row_product_price['product_price']);
+      $product_values=array_sum($product_price);
+      $total_price+=$product_values;
+    }
+  }
+
+  echo number_format($total_price, 0, ',', '.');
+}
+
+//lấy chi tiết đơn hàng của người dùng
+function get_user_order_details(){
+  global $con;
+  $username=$_SESSION['username'];
+  $get_details="SELECT * FROM user_table where username='$username'";
+  $result_query=mysqli_query($con,$get_details);
+  while($row_query=mysqli_fetch_array($result_query)){
+    $user_id=$row_query['user_id'];
+    if(!isset($_GET['edit_account'])){
+      if(!isset($_GET['my_orders'])){
+        if(!isset($_GET['delete_account'])){
+          $get_orders="SELECT * FROM user_orders where user_id=$user_id 
+          and order_status='pending'";
+          $result_orders_query=mysqli_query($con,$get_orders);
+          $row_count=mysqli_num_rows($result_orders_query);
+          if ($row_count > 0){
+            echo "<h3 class='text-center text-success mt-5 mb-2'>Bạn có <span 
+            class='text-danger'>$row_count</span> đơn hàng chờ xử lý</h3>
+            <p class='text-center'><a href='profile.php?my_orders' class='text-dark'>
+            Chi Tiết Đơn Hàng</a></p>";
+          }else{
+            echo "<h3 class='text-center text-success mt-5 mb-2'>
+            Bạn không có đơn hàng nào chờ xử lý</h3>
+            <p class='text-center'><a href='../index.php' class='text-dark'>
+            Tìm sản phẩm hoàn hảo dành cho bạn</a></p>";
+          }
+        }
+      }
+    }
+  }
+}
 ?>

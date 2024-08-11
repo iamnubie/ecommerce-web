@@ -2,6 +2,7 @@
 <?php
 include('includes/connect.php');
 include('functions/common_function.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -37,25 +38,27 @@ include('functions/common_function.php');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="display_all.php">Sản phẩm</a>
+          <a class="nav-link" href="#">Sản phẩm</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Đăng ký</a>
+          <a class="nav-link" href="./users_area/user_register.php">Đăng ký</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Liên hệ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-solid fa-cart-plus"></i><sup>1</sup></a>
+          <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-plus"></i><sup>
+            <?php cart_item();?>
+          </sup></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Tổng tiền:100/-</a>
+          <a class="nav-link" href="#">Tổng tiền: <?php total_cart_price();?><sup>đ</sup>/-</a>
         </li>
       </ul>
-      <form class="d-flex" action="search_product.php" method="get">
+      <form class="d-flex" action="" method="get">
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm" 
         aria-label="Search" name="search_data">
         <input type="submit" value="Tìm Kiếm" class="btn btn-outline-light"
@@ -65,15 +68,34 @@ include('functions/common_function.php');
   </div>
 </nav>
 
+<!-- calling cart function -->
+<?php
+  cart();
+ ?>
+
 <!-- second child -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
 <ul class="navbar-nav me-auto">
-<li class="nav-item">
-          <a class="nav-link" href="#">Chào Mừng Bạn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Đăng Nhập</a>
-        </li>
+        <?php
+        if(!isset($_SESSION['username'])){
+          echo "<li class='nav-item'>
+                  <a class='nav-link' href='#'>Chào Mừng Bạn</a>
+                </li>";
+        }else{
+          echo "<li class='nav-item'>
+                <a class='nav-link' href='#'>Chào Mừng ".$_SESSION['username']."</a>
+                </li>";
+        }
+        if(!isset($_SESSION['username'])){
+          echo "<li class='nav-item'>
+                <a class='nav-link' href='./users_area/user_login.php'>Đăng Nhập</a>
+                </li>";
+        }else{
+          echo "<li class='nav-item'>
+                <a class='nav-link' href='./users_area/logout.php'>Đăng Xuất</a>
+                </li>";
+        }
+        ?>
 </ul>
 </nav>
 
@@ -91,7 +113,7 @@ include('functions/common_function.php');
           <!-- fetching products -->
           <?php
           //calling function
-            get_all_products();
+            search_product();
             get_unique_categories();
             get_unique_brands();
           ?>
@@ -124,8 +146,9 @@ include('functions/common_function.php');
 
 
 <!-- last child -->
-<!-- include footer -->
-<?php include("./includes/footer.php") ?>
+ <div class="bg-info p-3 text-center">
+    <p>All rights reserved © Designed by Group-2 2024</p>
+ </div>
      </div>
 
 <!-- boostrap js link -->
@@ -133,4 +156,4 @@ include('functions/common_function.php');
 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
 crossorigin="anonymous"></script>
 </body>
-</html>
+</html>                                                                             
