@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./css/common_function.css">
 <?php
 //include connect file
 // include('./includes/connect.php');
@@ -9,7 +10,7 @@ function getproducts(){
     //condition to check or not
     if(!isset($_GET['category'])){
         if(!isset($_GET['brand'])){
-    $select_query="SELECT * FROM `products` order by rand() limit 0,5";
+    $select_query="SELECT * FROM `products` order by rand() limit 0,4";
     $result_query=mysqli_query($con,$select_query);
     // $row=mysqli_fetch_assoc($result_query);
     // echo $row['product_title'];
@@ -21,21 +22,21 @@ function getproducts(){
     $product_price = number_format($row['product_price'], 0, ',', '.');
     $category_id=$row['category_id'];
     $brand_id=$row['brand_id'];
-    echo "    <div class='col-md-4 mb-2'>
-              <div class='card' >
-              <img src='./admin_area/product_images/$product_image1' 
-              class='card-img-top' alt='$product_title'>
-              <div class='card-body'>
-              <h5 class='card-title'>$product_title</h5>
-              <p class='card-text'>$product_description</p>
-              <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
-              <a href='index.php?add_to_cart=$product_id' 
-              class='btn btn-info'>Thêm vào giỏ</a>
-              <a href='product_details.php?product_id=$product_id' 
-              class='btn btn-secondary'>Xem thêm</a>
+    echo "
+    <div class='col-md-4 mb-2'>
+        <a href='product_details.php?product_id=$product_id' class='card-link'>
+            <div class='card'>
+                <img src='./admin_area/product_images/$product_image1' 
+                class='card-img-top' alt='$product_title'>
+                <div class='card-body'>
+                    <h5 class='card-title'>$product_title</h5>
+                    <p class='card-text'>$product_description</p>
+                    <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+                    <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Thêm vào giỏ</a>
+                </div>
             </div>
-          </div>
-        </div>";
+        </a>
+    </div>";
         }
     }
 }
@@ -60,21 +61,21 @@ function get_all_products(){
   $product_price = number_format($row['product_price'], 0, ',', '.');
   $category_id=$row['category_id'];
   $brand_id=$row['brand_id'];
-  echo "    <div class='col-md-4 mb-2'>
-            <div class='card' >
-            <img src='./admin_area/product_images/$product_image1' 
-              class='card-img-top' alt='$product_title'>
-            <div class='card-body'>
-            <h5 class='card-title'>$product_title</h5>
-            <p class='card-text'>$product_description</p>
-            <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
-            <a href='index.php?add_to_cart=$product_id' 
-              class='btn btn-info'>Thêm vào giỏ</a>
-            <a href='product_details.php?product_id=$product_id' 
-              class='btn btn-secondary'>Xem thêm</a>
-          </div>
-        </div>
-      </div>";
+  echo "
+    <div class='col-md-4 mb-2'>
+        <a href='product_details.php?product_id=$product_id' class='card-link'>
+            <div class='card'>
+                <img src='./admin_area/product_images/$product_image1' 
+                class='card-img-top' alt='$product_title'>
+                <div class='card-body'>
+                    <h5 class='card-title'>$product_title</h5>
+                    <p class='card-text'>$product_description</p>
+                    <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+                    <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Thêm vào giỏ</a>
+                </div>
+            </div>
+        </a>
+    </div>";
       }
   }
 }
@@ -91,7 +92,7 @@ function get_unique_categories(){
     $result_query=mysqli_query($con,$select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows==0){
-        echo "<h2 class='text-center text-danger'>Mục hàng trống</h2>";
+        echo "<h2 class='empty-list-title'>Mục hàng trống</h2>";
     }
     while($row=mysqli_fetch_assoc($result_query)){
     $product_id=$row['product_id'];
@@ -101,21 +102,21 @@ function get_unique_categories(){
     $product_price = number_format($row['product_price'], 0, ',', '.');
     $category_id=$row['category_id'];
     $brand_id=$row['brand_id'];
-    echo "    <div class='col-md-4 mb-2'>
-              <div class='card' >
-              <img src='./admin_area/product_images/$product_image1' 
+    echo "
+    <div class='col-md-4 mb-2'>
+        <a href='product_details.php?product_id=$product_id' class='card-link'>
+            <div class='card'>
+                <img src='./admin_area/product_images/$product_image1' 
                 class='card-img-top' alt='$product_title'>
-              <div class='card-body'>
-              <h5 class='card-title'>$product_title</h5>
-              <p class='card-text'>$product_description</p>
-              <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
-              <a href='index.php?add_to_cart=$product_id' 
-                class='btn btn-info'>Thêm vào giỏ</a>
-              <a href='product_details.php?product_id=$product_id' 
-                class='btn btn-secondary'>Xem thêm</a>
+                <div class='card-body'>
+                    <h5 class='card-title'>$product_title</h5>
+                    <p class='card-text'>$product_description</p>
+                    <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+                    <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Thêm vào giỏ</a>
+                </div>
             </div>
-          </div>
-        </div>";
+        </a>
+    </div>";
         }
     }
 }
@@ -131,7 +132,7 @@ function get_unique_brands(){
     $result_query=mysqli_query($con,$select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows==0){
-        echo "<h2 class='text-center text-danger'>Thương hiệu chưa có sẵn hàng</h2>";
+        echo "<h2 class='empty-list-title2'>Thương hiệu chưa có sẵn hàng</h2>";
     }
     while($row=mysqli_fetch_assoc($result_query)){
     $product_id=$row['product_id'];
@@ -141,21 +142,21 @@ function get_unique_brands(){
     $product_price = number_format($row['product_price'], 0, ',', '.');
     $category_id=$row['category_id'];
     $brand_id=$row['brand_id'];
-    echo "    <div class='col-md-4 mb-2'>
-              <div class='card' >
-              <img src='./admin_area/product_images/$product_image1' 
+    echo "
+    <div class='col-md-4 mb-2'>
+        <a href='product_details.php?product_id=$product_id' class='card-link'>
+            <div class='card'>
+                <img src='./admin_area/product_images/$product_image1' 
                 class='card-img-top' alt='$product_title'>
-              <div class='card-body'>
-              <h5 class='card-title'>$product_title</h5>
-              <p class='card-text'>$product_description</p>
-              <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
-              <a href='index.php?add_to_cart=$product_id' 
-                class='btn btn-info'>Thêm vào giỏ</a>
-              <a href='product_details.php?product_id=$product_id' 
-                class='btn btn-secondary'>Xem thêm</a>
+                <div class='card-body'>
+                    <h5 class='card-title'>$product_title</h5>
+                    <p class='card-text'>$product_description</p>
+                    <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+                    <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Thêm vào giỏ</a>
+                </div>
             </div>
-          </div>
-        </div>";
+        </a>
+    </div>";
         }
     }
 }
@@ -200,7 +201,7 @@ function search_product(){
   $result_query=mysqli_query($con,$search_query);
   $num_of_rows=mysqli_num_rows($result_query);
   if($num_of_rows==0){
-      echo "<h2 class='text-center text-danger'>Không tìm thấy kết quả vừa tìm kiếm!</h2>";
+      echo "<h2 class='empty-list-title3'>Không tìm thấy kết quả vừa tìm kiếm!</h2>";
   }
   while($row=mysqli_fetch_assoc($result_query)){
   $product_id=$row['product_id'];
@@ -210,21 +211,21 @@ function search_product(){
   $product_price = number_format($row['product_price'], 0, ',', '.');
   $category_id=$row['category_id'];
   $brand_id=$row['brand_id'];
-  echo "    <div class='col-md-4 mb-2'>
-            <div class='card' >
-            <img src='./admin_area/product_images/$product_image1' 
-              class='card-img-top' alt='$product_title'>
-            <div class='card-body'>
-            <h5 class='card-title'>$product_title</h5>
-            <p class='card-text'>$product_description</p>
-            <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
-            <a href='index.php?add_to_cart=$product_id' 
-              class='btn btn-info'>Thêm vào giỏ</a>
-            <a href='product_details.php?product_id=$product_id' 
-              class='btn btn-secondary'>Xem thêm</a>
-          </div>
-        </div>
-      </div>";
+  echo "
+    <div class='col-md-4 mb-2'>
+        <a href='product_details.php?product_id=$product_id' class='card-link'>
+            <div class='card'>
+                <img src='./admin_area/product_images/$product_image1' 
+                class='card-img-top' alt='$product_title'>
+                <div class='card-body'>
+                    <h5 class='card-title'>$product_title</h5>
+                    <p class='card-text'>$product_description</p>
+                    <p class='card-text'>Giá: $product_price<sup>đ</sup>/-</p>
+                    <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Thêm vào giỏ</a>
+                </div>
+            </div>
+        </a>
+    </div>";
       }
   }
 }
@@ -265,14 +266,14 @@ function view_details(){
         </div>
       </div>
       
-      <div class='col-md-8'>
+      <div class='product-container'>
           <!-- show image -->
-           <div class='row'>
-              <div class='col-md-12'>
-                  <h4 class='text-center text-info mb-5'>Sản phẩm cùng loại</h4>
+           <div class='product-row'>
+              <div class='product-title'>
+                  <h4 class='title-center title-info title-spacing'>Sản phẩm cùng loại</h4>
               </div>
-              <div class='col-md-12'>
-              <img src='./admin_area/product_images/$product_image2' class='card-img-top' alt='$product_title'>
+              <div class='product-image-container'>
+              <img src='./admin_area/product_images/$product_image2' class='image-full' alt='$product_title'>
               </div>
               <!-- <div class='col-md-6'>
                <img src='images/den3.jpg' class='card-img-top' alt='$product_title'>
@@ -316,13 +317,13 @@ function cart(){
     $result_query=mysqli_query($con,$select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows>0){
-      echo "<script>alert('Sản phẩm đã có trong giỏ hàng')</script>";
+      // echo "<script>alert('Sản phẩm đã có trong giỏ hàng')</script>";
       echo "<script>window.open('index.php','_self')</script>";
     }else{
       $insert_query="insert into `cart_details` (product_id, ip_address, 
-      quantity) values ($get_product_id,'$get_ip_add',0)";
+      quantity) values ($get_product_id,'$get_ip_add',1)";
       $result_query=mysqli_query($con,$insert_query);
-      echo "<script>alert('Sản phẩm đã thêm vào giỏ hàng')</script>";
+      // echo "<script>alert('Sản phẩm đã thêm vào giỏ hàng')</script>";
       echo "<script>window.open('index.php','_self')</script>";
 
     }

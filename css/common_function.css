@@ -1,0 +1,232 @@
+.card-img-top:hover {
+    transform: scale(1.2);
+}
+
+/* Hiệu ứng hover cho các nút */
+.btn {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-info:hover {
+    background-color: #17a2b8;
+    transform: scale(1.05);
+}
+
+.btn-secondary:hover {
+    background-color: #6c757d;
+    transform: scale(1.05);
+}
+
+/* Thiết kế lại thẻ card để đẹp hơn */
+.card {
+    width: 100%;
+    max-width: 300px;
+    /* Đặt chiều rộng tối đa cho thẻ */
+    height: 470px;
+    /* Đặt chiều cao cố định cho thẻ */
+    margin: auto;
+    /* Căn giữa thẻ */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Dàn đều các phần tử bên trong thẻ */
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    border-radius: 8px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 250px;
+    /* Đặt chiều cao cố định cho ảnh */
+    object-fit: cover;
+    object-fit: contain;
+    /* Đảm bảo ảnh luôn vừa khít và không bị biến dạng */
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Điều chỉnh margin và padding của các phần tử */
+.card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    flex-grow: 1;
+    /* Đảm bảo thẻ body co giãn để lấp đầy không gian */
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    flex-shrink: 0;
+    /* Đảm bảo tiêu đề không bị ép co lại */
+}
+
+.card-text {
+    color: #555;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    flex-grow: 1;
+    /* Đảm bảo mô tả co giãn để lấp đầy không gian */
+}
+
+.card-body .btn {
+    margin: 5px 0;
+}
+
+/* Căn giữa text trong tiêu đề chính */
+h3,
+p {
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Làm cho thẻ card-link chiếm toàn bộ không gian của thẻ card */
+.card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    /* Giữ nguyên màu sắc của nội dung bên trong */
+}
+
+.card-link .card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Thêm hiệu ứng khi hover vào card */
+.card-link:hover .card {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Vô hiệu hóa hiệu ứng hover riêng lẻ của các nút bên trong */
+.card-link .btn-info:hover {
+    background-color: #17a2b8;
+    transform: scale(1.05);
+}
+
+.product-container {
+    width: 66.66667%;
+    /* Tương đương với 8/12 của Bootstrap */
+    margin: 0 auto;
+    /* Canh giữa cột */
+    height: 500px;
+}
+
+.product-row {
+    display: flex;
+    flex-direction: column;
+    /* Đặt hướng thành cột */
+    align-items: center;
+    /* Canh giữa nội dung theo chiều ngang */
+}
+
+.product-title {
+    width: 100%;
+    font-size: 25px;
+    /* Chiếm toàn bộ chiều rộng */
+}
+
+.title-center {
+    text-align: center;
+    /* Canh giữa nội dung */
+}
+
+.title-info {
+    color: #17a2b8;
+}
+
+.title-spacing {
+    margin-bottom: 2rem;
+    /* Khoảng cách phía dưới */
+}
+
+.product-image-container {
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng của cột */
+    /* height: 400px; */
+    /* Kích thước cố định cho chiều cao */
+    overflow: hidden;
+    /* Ẩn phần thừa nếu có */
+    position: relative;
+    /* Để dễ dàng điều chỉnh vị trí nếu cần */
+    display: flex;
+    /* Sử dụng flexbox để căn giữa ảnh */
+    justify-content: center;
+    /* Canh giữa theo chiều ngang */
+    align-items: center;
+    /* Canh giữa theo chiều dọc */
+}
+
+.image-full {
+    max-width: 100%;
+    /* Đảm bảo hình ảnh không vượt quá chiều rộng của container */
+    height: auto;
+    /* Giữ tỉ lệ cho chiều cao */
+    object-fit: cover;
+    /* Giữ tỉ lệ và cắt bỏ phần thừa để phù hợp */
+    border-radius: 0.5rem;
+    /* Bo góc nhẹ cho hình ảnh */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Hiệu ứng bóng nhẹ */
+}
+
+.empty-list-title {
+    text-align: center;
+    /* Canh giữa nội dung */
+    color: #dc3545;
+    /* Màu chữ đỏ tương tự Bootstrap */
+    font-size: 3rem;
+    /* Kích thước chữ lớn hơn */
+    margin-bottom: 1.5rem;
+    /* Khoảng cách phía dưới */
+    font-weight: bold;
+    /* Làm đậm chữ */
+    text-transform: uppercase;
+    /* Chữ in hoa */
+    padding-left: 380px;
+    white-space: nowrap;
+}
+
+.empty-list-title2 {
+    text-align: center;
+    /* Canh giữa nội dung */
+    color: #dc3545;
+    /* Màu chữ đỏ tương tự Bootstrap */
+    font-size: 3rem;
+    /* Kích thước chữ lớn hơn */
+    margin-bottom: 1.5rem;
+    /* Khoảng cách phía dưới */
+    font-weight: bold;
+    /* Làm đậm chữ */
+    text-transform: uppercase;
+    /* Chữ in hoa */
+    padding-left: 250px;
+    white-space: nowrap;
+}
+
+.empty-list-title3 {
+    text-align: center;
+    /* Canh giữa nội dung */
+    color: #dc3545;
+    /* Màu chữ đỏ tương tự Bootstrap */
+    font-size: 3rem;
+    /* Kích thước chữ lớn hơn */
+    margin-top: 3rem;
+    /* Khoảng cách phía dưới */
+    font-weight: bold;
+    /* Làm đậm chữ */
+    text-transform: uppercase;
+    /* Chữ in hoa */
+    padding-left: 150px;
+    white-space: nowrap;
+}

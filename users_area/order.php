@@ -45,7 +45,7 @@ $count_products,NOW(),'$status')";
 
 $result_query=mysqli_query($con, $insert_orders);
 if ($result_query) {
-    echo "<script>alert('Đơn hàng đã được xử lý.')</script>";
+    // echo "<script>alert('Đơn hàng đã được xử lý.')</script>";
     echo "<script>window.open('profile.php', '_self')</script>";
 }
 

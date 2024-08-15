@@ -7,147 +7,212 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecommerce website using PHP and MySQL.</title>
-    <!-- boostrap CSS link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
-    rel="stylesheet" 
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
-    crossorigin="anonymous">
-     <!-- font awesome link -->
-     <link rel="stylesheet" 
-     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
-     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
-     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-     <!-- css file -->
-      <link rel="stylesheet" href="style.css">
+    <!-- css file -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    /* Main layout */
+    .main-content {
+        display: flex;
+        padding: 15px;
+    }
+
+    /* Products Section */
+    .products-section {
+        width: 75%;
+        padding-right: 10px;
+    }
+
+    .products-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .products-grid>div {
+        flex: 1 1 calc(33.33% - 20px);
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 25%;
+        background-color: #f8f9fa;
+        padding: 20px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    /* Sidebar Headers */
+    .sidebar-header {
+        color: white;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+        border-radius: 5px;
+        text-transform: uppercase;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 25px;
+    }
+
+    /* Sidebar Items */
+    .categories li,
+    .brands li {
+        background-color: #6c757d;
+        color: white;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, font-size 0.3s ease;
+        cursor: pointer;
+        font-size: 15px;
+        /* Set initial font size */
+    }
+
+    .categories li:hover,
+    .brands li:hover {
+        background-color: #495057;
+        font-size: 15px;
+        /* Increase font size on hover */
+    }
+
+    .categories li a,
+    .brands li a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-size: inherit;
+        /* Inherit the font size from li */
+    }
+
+    .categories li a:hover,
+    .brands li a:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+    .categories li a,
+    .brands li a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    /* Make the entire li clickable */
+    .categories li,
+    .brands li {
+        position: relative;
+    }
+
+    .sidebar-header {
+        background-color: #ce962e !important;
+    }
+
+    .sidebar-header:hover {
+        background-color: #CC6600 !important;
+    }
+
+    /* .header {
+        padding: 0.1rem 3% !important;
+    } */
+    </style>
 </head>
+
 <body>
-    <!-- navbar -->
-     <div class="container-fluid p-0">
-        <!-- first child -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-info">
-  <div class="container-fluid">
-    <img src="./images/logo.png" alt="" class="logo">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Trang chủ</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="display_all.php">Sản phẩm</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./users_area/user_register.php">Đăng ký</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Liên hệ</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-plus"></i><sup>
-            <?php cart_item();?>
-        </sup></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Tổng tiền: <?php total_cart_price();?><sup>đ</sup>/-</a>
-        </li>
-      </ul>
-      <form class="d-flex" action="search_product.php" method="get">
-        <input class="form-control me-2" type="search" placeholder="Tìm kiếm" 
-        aria-label="Search" name="search_data">
-        <input type="submit" value="Tìm Kiếm" class="btn btn-outline-light"
-        name="search_data_product">
-      </form>
-    </div>
-  </div>
-</nav>
+    <!-- header -->
 
-<!-- second child -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-<ul class="navbar-nav me-auto">
-        <?php
-        if(!isset($_SESSION['username'])){
-          echo "<li class='nav-item'>
-                  <a class='nav-link' href='#'>Chào Mừng Bạn</a>
-                </li>";
-        }else{
-          echo "<li class='nav-item'>
-                <a class='nav-link' href='#'>Chào Mừng ".$_SESSION['username']."</a>
-                </li>";
-        }
-        if(!isset($_SESSION['username'])){
-          echo "<li class='nav-item'>
-                <a class='nav-link' href='./users_area/user_login.php'>Đăng Nhập</a>
-                </li>";
-        }else{
-          echo "<li class='nav-item'>
-                <a class='nav-link' href='./users_area/logout.php'>Đăng Xuất</a>
-                </li>";
-        }
+    <section class="header">
+        <a href="index.php" class="logo"> MongLinhStore</a>
+        <!-- <a href="index.php" class="logo"> <img src="images/ML.jpg" alt="Logo" style="width: 100px;"></a> -->
+        <nav class="navbar">
+            <a href="index.php">Trang Chủ</a>
+            <a href="display_all.php">Sản Phẩm</a>
+            <?php
+if(isset($_SESSION['username'])){
+  echo "<a class='nav-link' href='./users_area/profile.php'>Tài Khoản</a>";
+}else{
+  echo "<a class='nav-link' href='./users_area/user_register.php'>Đăng ký</a>";
+}
         ?>
-</ul>
-</nav>
+            <a href="index.php#contact">Liên Hệ</a>
+        </nav>
 
-<!-- third chile -->
-<div class="bg-light my-3">
-    <h3 class="text-center">Mong Linh Store</h3>
-    <p class="text-center">Lắng Nghe - Kiên Trì - Đổi Mới</p>
-</div>
+        <div class="icons">
+            <a href="cart.php"> 🛒<sup><?php cart_item();?></sup></a>
+            <form class="search-form" action="search_product.php" method="get">
+                <input type="search" placeholder="Tìm kiếm" aria-label="Search" name="search_data">
+                <input type="submit" value="Tìm Kiếm" name="search_data_product">
+            </form>
+            <a>
+                <?php
+            if(!isset($_SESSION['username'])){
+                echo "<a class='nav-link' href='./users_area/user_login.php'><div id='account-btn' class='fas fa-user'></div></a>";
+            }else{
+                echo "<a class='nav-link' href='./users_area/logout.php'><i class='fa fa-sign-out-alt logout-icon'></i></a>";
+            }
+        ?>
+            </a>
+        </div>
 
-<!-- fourth child -->
- <div class="row px-1">
-    <div class="col-md-10">
-        <!-- products -->
-         <div class="row">
-          <!-- fetching products -->
-          <?php
-          //calling function
-            get_all_products();
-            get_unique_categories();
-            get_unique_brands();
-          ?>
-<!-- row end -->
-</div>
-<!-- col end -->
-</div>
-    <div class="col-md-2 bg-secondary p-0">
-      <!-- brands to be displayed -->
-        <ul class="navbar-nav me-auto text-center">
-          <li class="nav-item bg-info">
-            <a href="#" class="nav-link text-light"><h4>Thương Hiệu</h4></a>
-          </li>
-          <?php
-            getbrands();
-          ?>
-        </ul>
+    </section>
 
-        <!-- categories to be displayed -->
-        <ul class="navbar-nav me-auto text-center">
-          <li class="nav-item bg-info">
-            <a href="#" class="nav-link text-light"><h4>Mục Hàng</h4></a>
-          </li>
-          <?php
-            getcategories();
-          ?>
-        </ul>
+    <!-- header -->
+
+    <!-- second child -->
+    <div class="main-content">
+        <div class="products-section">
+            <div class="products-grid">
+                <?php
+                // calling functions
+                get_all_products();
+                get_unique_categories();
+                get_unique_brands();
+            ?>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul class="categories">
+                <li class="sidebar-header">Mục Hàng</li>
+                <?php getcategories(); ?>
+            </ul>
+            <ul class="brands">
+                <li class="sidebar-header">Thương Hiệu</li>
+                <?php getbrands(); ?>
+            </ul>
+        </div>
     </div>
- </div>
 
-
-<!-- last child -->
-<!-- include footer -->
-<?php include("./includes/footer.php") ?>
-     </div>
-
-<!-- boostrap js link -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
-crossorigin="anonymous"></script>
+    <!-- last child -->
+    <!-- include footer -->
+    <section class="credit">
+        <div class="credit-left">
+            <h3>Thông Tin Liên Hệ</h3>
+            <p>Email: 2251120428@ut.edu.vn (Minh)</p>
+            <p>Email: 2251120305@ut.edu.vn (Long)</p>
+        </div>
+        <div class="credit-right">
+            <h3>Copyright</h3>
+            <p>&copy; 2024 MongLingStore. All Rights Reserved.</p>
+        </div>
+    </section>
 </body>
+
 </html>

@@ -1,8 +1,40 @@
-<!-- connect file -->
 <?php
 include('includes/connect.php');
 include('functions/common_function.php');
 session_start();
+
+// Cập nhật giỏ hàng
+function update_cart() {
+    global $con;
+    $get_ip_add = getIPAddress();
+
+    if (isset($_POST['update_cart'])) {
+        foreach ($_POST['qty'] as $product_id => $quantity) {
+            if ($quantity > 0) {
+                $update_cart = "UPDATE `cart_details` SET quantity='$quantity' WHERE product_id='$product_id' AND ip_address='$get_ip_add'";
+                mysqli_query($con, $update_cart);
+            }
+        }
+        // echo "<script>alert('Giỏ hàng đã được cập nhật!');</script>";
+        echo "<script>window.location='cart.php';</script>";
+    }
+
+    if (isset($_POST['removeitem'])) {
+        foreach ($_POST['removeitem'] as $remove_id) {
+            $delete_query = "DELETE FROM `cart_details` WHERE product_id=$remove_id AND ip_address='$get_ip_add'";
+            mysqli_query($con, $delete_query);
+        }
+        // echo "<script>alert('Sản phẩm đã được xóa khỏi giỏ hàng!');</script>";
+        echo "<script>window.location='cart.php';</script>";
+    }
+
+    // Điều hướng về trang index.php khi nhấn nút "Tiếp tục mua hàng"
+    if (isset($_POST['continue_shopping'])) {
+        echo "<script>window.location='index.php';</script>";
+    }
+}
+
+update_cart();
 ?>
 
 <!DOCTYPE html>
@@ -11,230 +43,203 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web thương mại - giỏ hàng.</title>
-    <!-- boostrap CSS link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!-- font awesome link -->
+    <title>Web thương mại - giỏ hàng</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- css file -->
-    <link rel="stylesheet" href="style.css">
     <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+    }
+
+    .navbar {
+        background-color: #17a2b8;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+    }
+
+    .navbar a:hover {
+        color: yellow;
+    }
+
+    .container {
+        margin: 20px auto;
+        max-width: 80%;
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3,
+    p {
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        text-align: center;
+    }
+
+    th {
+        background-color: #17a2b8;
+        color: white;
+    }
+
     .cart_img {
         width: 100px;
         height: 100px;
         object-fit: contain;
+    }
+
+    .btn {
+
+        background-color: #17a2b8;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 17px;
+        margin: 3px;
+    }
+
+    a:-webkit-any-link {
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background-color: darkblue;
+        color: white;
+    }
+
+    .bg-danger {
+        background-color: #dc3545;
+    }
+
+    .bg-danger:hover {
+        background-color: #c82333;
+    }
+
+    .text-info {
+        color: orangered;
+    }
+
+    h4 {
+        font-size: 20px;
     }
     </style>
 </head>
 
 <body>
     <!-- navbar -->
-    <div class="container-fluid p-0">
-        <!-- first child -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-info">
-            <div class="container-fluid">
-                <img src="./images/logo.png" alt="" class="logo">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="display_all.php">Sản phẩm</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./users_area/user_register.php">Đăng ký</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Liên hệ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-plus"></i><sup>
-                                    <?php cart_item();?>
-                                </sup></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <nav class="navbar">
+        <img src="./images/ML.jpg" alt="Logo" class="logo" style="width: 7%;">
+        <a href="index.php">Trang chủ</a>
+        <a href="display_all.php">Sản phẩm</a>
+        <a href="./users_area/user_register.php">Đăng ký</a>
+        <a href="#">Liên hệ</a>
+        <a href="cart.php"><i class="fa-solid fa-cart-plus"></i><sup><?php cart_item(); ?></sup></a>
+        <?php if (!isset($_SESSION['username'])) { ?>
+        <a href="./users_area/user_login.php">Đăng Nhập</a>
+        <?php } else { ?>
+        <a href="./users_area/logout.php">Đăng Xuất</a>
+        <?php } ?>
+    </nav>
 
-        <!-- calling cart function -->
-        <?php
-  cart();
- ?>
+    <div class="container">
 
-        <!-- second child -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-            <ul class="navbar-nav me-auto">
-                <?php
-        if(!isset($_SESSION['username'])){
-          echo "<li class='nav-item'>
-                  <a class='nav-link' href='#'>Chào Mừng Bạn</a>
-                </li>";
-        }else{
-          echo "<li class='nav-item'>
-                <a class='nav-link' href='#'>Chào Mừng ".$_SESSION['username']."</a>
-                </li>";
-        }
-        if(!isset($_SESSION['username'])){
-          echo "<li class='nav-item'>
-                <a class='nav-link' href='./users_area/user_login.php'>Đăng Nhập</a>
-                </li>";
-        }else{
-          echo "<li class='nav-item'>
-                <a class='nav-link' href='./users_area/logout.php'>Đăng Xuất</a>
-                </li>";
-        }
-        ?>
-            </ul>
-        </nav>
-
-        <!-- third chile -->
-        <div class="bg-light my-3">
-            <h3 class="text-center">Mong Linh Store</h3>
-            <p class="text-center">Lắng Nghe - Kiên Trì - Đổi Mới</p>
-        </div>
-
-        <!-- fourth child table -->
-        <div class="container">
-            <div class="row">
-                <form action="" method="post">
-                    <table class="table table-bordered text-center">
-
-                        <!-- code php show du lieu dong -->
-                        <?php
-                   $get_ip_add = getIPAddress();
-                   $total_price=0;
-                   $cart_query="SELECT * FROM `cart_details` where ip_address='$get_ip_add'";
-                   $result=mysqli_query($con,$cart_query);
-                   $result_count=mysqli_num_rows($result);
-                   if($result_count>0){
-                    echo "<thead>
-                              <tr>
-                                  <th>Tên Sản Phẩm</th>
-                                  <th>Ảnh Sản Phẩm</th>
-                                  <th>Số Lượng</th>
-                                  <th>Đơn Giá</th>
-                                  <th>Loại Bỏ</th>
-                                  <th colspan='2'>Tương Tác</th>
-                              </tr>
-                          </thead>
-                          <tbody>";
-
-                   while($row=mysqli_fetch_array($result)){
-                     $product_id=$row['product_id'];
-                     $select_products="SELECT * FROM `products` where product_id='$product_id'";
-                     $result_products=mysqli_query($con,$select_products);
-                     while($row_product_price=mysqli_fetch_array($result_products)){
-                       $product_price=array($row_product_price['product_price']);
-                      //  $price_table=number_format($row_product_price['product_price'], 0, ',', '.');
-                       $price_table=$row_product_price['product_price'];
-                       $product_title=$row_product_price['product_title'];
-                       $product_image1=$row_product_price['product_image1'];
-                       $product_values=array_sum($product_price);
-                       $total_price+=$product_values;
-                 ?>
-                        <tr>
-                            <td><?php echo $product_title ?></td>
-                            <td><img src="./admin_area/product_images/<?php echo $product_image1 ?>" alt=""
-                                    class="cart_img"></td>
-                            <td><input type="text" name="qty" class="form-input w-50"></td>
-                            <?php
-                      $get_ip_add = getIPAddress();
-                      if(isset($_POST['update_cart'])){
-                        $quantities=$_POST['qty'];
-                        $update_cart="UPDATE `cart_details` SET quantity=$quantities where 
-                        ip_address='$get_ip_add'";
-                        $result_products_quantity=mysqli_query($con,$update_cart);
-                        $total_price=$total_price*$quantities;
-                      }
-
+        <!-- giỏ hàng -->
+        <form action="" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Ảnh Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Đơn Giá</th>
+                        <th>Cập Nhật</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $get_ip_add = getIPAddress();
+                    $total_price = 0;
+                    $cart_query = "SELECT * FROM `cart_details` WHERE ip_address='$get_ip_add'";
+                    $result = mysqli_query($con, $cart_query);
+                    $result_count = mysqli_num_rows($result);
+                    
+                    if ($result_count > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
+                            $product_id = $row['product_id'];
+                            $select_products = "SELECT * FROM `products` WHERE product_id='$product_id'";
+                            $result_products = mysqli_query($con, $select_products);
+                            while ($row_product_price = mysqli_fetch_array($result_products)) {
+                                $product_price = $row_product_price['product_price'];
+                                $product_title = $row_product_price['product_title'];
+                                $product_image1 = $row_product_price['product_image1'];
+                                $quantity = $row['quantity'];
+                                $subtotal = $product_price * $quantity;
+                                $total_price += $subtotal;
                     ?>
-                            <td><?php echo $price_table ?><sup>đ</sup>/-</td>
-                            <td><input type="checkbox" name="removeitem[]" value="<?php echo $product_id?>"></td>
-                            <td>
-                                <!-- <button class="bg-info px-3 py-2 border-0 mx-3">Cập Nhật</button> -->
-                                <input type="submit" value="Cập Nhật" class="bg-info px-3 py-2 border-0 mx-3"
-                                    name="update_cart">
-                                <!-- <button class="bg-info px-3 py-2 border-0 mx-3">Xóa</button> -->
-                                <input type="submit" value="Xóa" class="bg-info px-3 py-2 border-0 mx-3"
-                                    name="remove_cart">
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><?php echo $product_title ?></td>
+                        <td><img src="./admin_area/product_images/<?php echo $product_image1 ?>" alt=""
+                                class="cart_img"></td>
+                        <td><input type="number" name="qty[<?php echo $product_id; ?>]" class="form-input w-50"
+                                value="<?php echo $quantity; ?>" min="1" step="1"></td>
+                        <td><?php echo number_format($product_price, 0, ',', '.'); ?><sup>đ</sup></td>
+                        <td>
+                            <input type="submit" value="Cập Nhật" class="btn" name="update_cart">
+                        </td>
+                        <td>
+                            <button type="submit" name="removeitem[]" value="<?php echo $product_id?>"
+                                class="bg-danger btn">Xóa</button>
+                        </td>
+                    </tr>
+                    <?php
+                            }
+                        }
+                    } else {
+                        echo "<tr><td colspan='6' class='text-danger'>Giỏ hàng của bạn đang trống.</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
 
-                        <?php }}}
-                else{
-                  echo "<h2 class='text-center text-danger'>Giỏ hàng của bạn đang trống.</h2>";
+            <!-- subtotal -->
+            <div class="d-flex mb-4">
+                <?php
+                if ($result_count > 0) {
+                    echo "<h4 class='px-3'>Tổng Thu: <strong class='text-info'>" . number_format($total_price, 0, ',', '.') . "<sup>đ</sup></strong></h4>
+                          <input type='submit' value='Tiếp tục mua hàng' class='btn' name='continue_shopping'>
+                          <a href='./users_area/checkout.php' class='btn'>Thanh toán</a>";
+                } else {
+                    echo "<input type='submit' value='Tiếp tục mua hàng' class='btn' name='continue_shopping'>";
                 }
                 ?>
-                        </tbody>
-                    </table>
-                    <!-- subtotal -->
-                    <div class="d-flex mb-4">
-                        <?php
-          $get_ip_add = getIPAddress();
-          $cart_query="SELECT * FROM `cart_details` where ip_address='$get_ip_add'";
-          $result=mysqli_query($con,$cart_query);
-          $result_count=mysqli_num_rows($result);
-          if($result_count>0){
-            echo "            
-            <h4 class='px-3'>Tổng Thu: <strong 
-              class='text-info'>" . number_format($total_price, 0, ',', '.') . "
-            <sup>đ</sup>/-</strong></h4>
-            <input type='submit' value='Tiếp tục mua hàng' 
-              class='bg-info px-3 py-2 border-0 mx-3' name='continue_shopping'>
-            <button class='bg-secondary p-3 py-2 border-0'>
-              <a href='./users_area/checkout.php' class='text-light text-decoration-none'>Thanh toán</a></button>";
-          }else{
-            echo " 
-            <input type='submit' value='Tiếp tục mua hàng' 
-              class='bg-info px-3 py-2 border-0 mx-3' name='continue_shopping'>";
-          }
-          if(isset($_POST['continue_shopping'])){
-            echo "<script>window.open('index.php','_self')</script>";
-          }
-          ?>
-                    </div>
             </div>
-        </div>
         </form>
-
-        <!-- function xoa san pham -->
-        <?php
-  function remove_cart_item(){
-    global $con;
-    if(isset($_POST['remove_cart'])){
-      foreach($_POST['removeitem'] as $remove_id){
-        echo $remove_id;
-        $delete_query="DELETE FROM `cart_details` where product_id=$remove_id";
-        $run_detele=mysqli_query($con,$delete_query);
-        if($run_detele){
-          echo "<script>window.open('cart.php','_self')</script>";
-        }
-      }
-    }
-  }
-  echo $remove_item=remove_cart_item();
- ?>
-
-        <!-- last child -->
-        <!-- include footer -->
-        <?php include("./includes/footer.php") ?>
     </div>
-
-    <!-- boostrap js link -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
 </body>
 
 </html>

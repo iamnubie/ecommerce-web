@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    max-height: 90vh;
+    /* Giới hạn chiều cao container */
+    overflow-y: auto;
+    /* Thêm thanh cuộn dọc nếu cần */
+}
+
+
+.container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #9b59b6;
+}
+
+.form-group input[type="submit"] {
+    background-color: #9b59b6;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #8e44ad;
+}
+
+.small-text {
+    font-size: 12px;
+    margin-top: 15px;
+    color: #666;
+}
+
+.small-text a {
+    color: #9b59b6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.small-text a:hover {
+    text-decoration: underline;
+}

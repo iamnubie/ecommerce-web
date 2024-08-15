@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+.navbar {
+    background-color: #17a2b8;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.navbar a:hover {
+    color: yellow;
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 80%;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h3,
+p {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    text-align: center;
+}
+
+th {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.cart_img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.btn {
+
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 17px;
+    margin: 3px;
+}
+
+a:-webkit-any-link {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: darkblue;
+    color: white;
+}
+
+.bg-danger {
+    background-color: #dc3545;
+}
+
+.bg-danger:hover {
+    background-color: #c82333;
+}
+
+.text-info {
+    color: orangered;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+.container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 50%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #9b59b6;
+}
+
+.form-group input[type="submit"] {
+    background-color: #9b59b6;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* width: 50%; */
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #8e44ad;
+}
