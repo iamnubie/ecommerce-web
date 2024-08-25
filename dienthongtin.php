@@ -192,46 +192,48 @@ update_cart();
         </form>
     </div>
     <div class="container">
-        <div class="header">
-            <h2>Điền Thông Tin Khách Hàng</h2>
+        <div class="box">
+            <div class="header">
+                <h2>Điền Thông Tin Khách Hàng</h2>
+            </div>
+            <form action="" method="post">
+                <!-- Name field -->
+                <div class="form-group">
+                    <label for="customer_name" class="form-label">Họ Tên</label>
+                    <input type="text" id="customer_name" placeholder="Nhập họ tên của bạn" autocomplete="off"
+                        required="required" name="customer_name" />
+                </div>
+
+                <!-- Email field -->
+                <div class="form-group">
+                    <label for="customer_email" class="form-label">Email</label>
+                    <input type="email" id="customer_email" placeholder="Nhập email của bạn" autocomplete="off"
+                        required="required" name="customer_email" />
+                </div>
+
+                <!-- Phone Number field -->
+                <div class="form-group">
+                    <label for="customer_phone" class="form-label">Số Điện Thoại</label>
+                    <input type="tel" id="customer_phone" placeholder="Nhập số điện thoại của bạn" autocomplete="off"
+                        required="required" name="customer_phone" pattern="^0[0-9]{9,}$"
+                        title="Số điện thoại phải bắt đầu bằng 0 và có ít nhất 10 chữ số." />
+                </div>
+
+                <!-- Address field -->
+                <!-- Address field -->
+                <div class="form-group">
+                    <label for="customer_address" class="form-label">Địa Chỉ</label>
+                    <input type="text" id="customer_address" placeholder="Nhập địa chỉ của bạn" autocomplete="off"
+                        required="required" name="customer_address" minlength="10"
+                        title="Địa chỉ phải có ít nhất 10 ký tự." />
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Xác Nhận Thông Tin" name="submit_customer_info">
+                </div>
+            </form>
         </div>
-        <form action="" method="post">
-            <!-- Name field -->
-            <div class="form-group">
-                <label for="customer_name" class="form-label">Họ Tên</label>
-                <input type="text" id="customer_name" placeholder="Nhập họ tên của bạn" autocomplete="off"
-                    required="required" name="customer_name" />
-            </div>
-
-            <!-- Email field -->
-            <div class="form-group">
-                <label for="customer_email" class="form-label">Email</label>
-                <input type="email" id="customer_email" placeholder="Nhập email của bạn" autocomplete="off"
-                    required="required" name="customer_email" />
-            </div>
-
-            <!-- Phone Number field -->
-            <div class="form-group">
-                <label for="customer_phone" class="form-label">Số Điện Thoại</label>
-                <input type="tel" id="customer_phone" placeholder="Nhập số điện thoại của bạn" autocomplete="off"
-                    required="required" name="customer_phone" pattern="^0[0-9]{9,}$"
-                    title="Số điện thoại phải bắt đầu bằng 0 và có ít nhất 10 chữ số." />
-            </div>
-
-            <!-- Address field -->
-            <!-- Address field -->
-            <div class="form-group">
-                <label for="customer_address" class="form-label">Địa Chỉ</label>
-                <input type="text" id="customer_address" placeholder="Nhập địa chỉ của bạn" autocomplete="off"
-                    required="required" name="customer_address" minlength="10"
-                    title="Địa chỉ phải có ít nhất 10 ký tự." />
-            </div>
-
-
-            <div class="form-group">
-                <input type="submit" value="Xác Nhận Thông Tin" name="submit_customer_info">
-            </div>
-        </form>
     </div>
     <div class="container">
         <?php
@@ -285,7 +287,7 @@ update_cart();
             // Xóa sản phẩm khỏi giỏ hàng
             $empty_cart = "DELETE FROM `cart_details` WHERE ip_address='$get_ip_address'";
             mysqli_query($con, $empty_cart);
-
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
             // In ra thông tin đơn hàng
             echo "<div class='order-confirmation'>
                     <h2>Xác nhận thông tin đơn hàng</h2>

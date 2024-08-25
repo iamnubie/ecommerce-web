@@ -36,6 +36,11 @@ include('../functions/common_function.php');
     body {
         overflow-x: hidden;
     }
+
+    .product_img {
+        width: 100px;
+        object-fit: contain;
+    }
     </style>
 </head>
 
@@ -101,13 +106,20 @@ include('../functions/common_function.php');
             if(isset($_GET['view_products'])){
                 include('view_products.php');
             }
+            if(isset($_GET['edit_products'])){
+                include('edit_products.php');
+            }
+            if(isset($_GET['hide_product'])){
+                include('hide_product.php');
+            }
             ?>
         </div>
 
         <!-- last child -->
-        <div class="bg-info p-3 text-center footer">
+        <!-- <div class="bg-info p-3 text-center footer">
             <p>All rights reserved © Designed by Group-2 2024</p>
-        </div>
+        </div> -->
+        <?php include("../includes/footer.php") ?>
     </div>
 
 
