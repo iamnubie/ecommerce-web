@@ -2,6 +2,7 @@
 <?php
 include('../includes/connect.php');
 include('../functions/common_function.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +42,17 @@ include('../functions/common_function.php');
         width: 100px;
         object-fit: contain;
     }
+
+    .third-child {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .container-fluid {
+        width: 101% !important;
+    }
     </style>
 </head>
 
@@ -50,12 +62,17 @@ include('../functions/common_function.php');
         <!-- first child -->
         <nav class="navbar navbar-expand-lg navbar-light bg-info">
             <div class="container-fluid">
-                <img src="../images/logo.png" alt="" class="logo">
+                <img src="../images/ML.jpg" alt="" class="logo">
                 <nav class="navbar navbar-expand-lg">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="" class="nav-link">Chào Mừng Bạn</a>
-                        </li>
+                            <?php 
+                        if(isset($_SESSION['admin_name'])){
+                            echo '<a href="" class="nav-link">Chào Mừng ' . $_SESSION['admin_name'] . '</a>';
+                        } else {
+                            echo '<a href="" class="nav-link">Chào Mừng bạn</a>';
+                        }
+                        ?> </li>
                     </ul>
                 </nav>
             </div>
@@ -67,29 +84,42 @@ include('../functions/common_function.php');
         </div>
 
         <!-- third child -->
-        <div class="row">
+        <div class="row third-child">
             <div class="col-md-12 bg-secondary p-1 d-flex align-items-center">
                 <div class="p-3">
                     <a href="#"><img src="../images/logo-uth.jpg" alt="" class="admin_image"></a>
-                    <p class="text-light text-center">Tên Quản Trị</p>
+                    <p class="text-light text-center"><?php 
+    if(isset($_SESSION['admin_name'])){
+        echo $_SESSION['admin_name'];
+    } else {
+        echo 'Tên Quản Trị';
+    }
+    ?>
+                    </p>
                 </div>
                 <!-- button*10>a.nav-link.text-light.bg-info.my-1 -->
                 <div class="button text-center">
-                    <button class="my-1"><a href="insert_product.php" class="nav-link text-light bg-info my-1">Thêm Sản
+                    <button class="my-1"><a href="index.php?insert_product"
+                            class="nav-link text-light bg-info my-1">Thêm Sản
                             Phẩm</a></button>
                     <button><a href="index.php?view_products" class="nav-link text-light bg-info my-1">Xem Sản
                             Phẩm</a></button>
                     <button><a href="index.php?insert_category" class="nav-link text-light bg-info my-1">Thêm Mục
                             Hàng</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">Xem Mục Hàng</a></button>
+                    <button><a href="index.php?view_categories" class="nav-link text-light bg-info my-1">Xem Mục
+                            Hàng</a></button>
                     <button><a href="index.php?insert_brand" class="nav-link text-light bg-info my-1">Thêm Thương
                             Hiệu</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">Xem Thương Hiệu</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">Tất Cả Đơn Hàng</a></button>
-                    <button class="my-1"><a href="" class="nav-link text-light bg-info my-1">Tất Cả Thanh
-                            Toán</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">Danh Sách Users</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">Đăng Xuất</a></button>
+                    <button><a href="index.php?view_brands" class="nav-link text-light bg-info my-1">Xem Thương
+                            Hiệu</a></button>
+                    <button><a href="index.php?list_orders" class="nav-link text-light bg-info my-1">Tất Cả Đơn
+                            Hàng</a></button>
+                    <button class="my-1">
+                        <a href="index.php?list_payments" class="nav-link text-light bg-info my-1">Tất Cả Thanh Toán</a>
+                    </button>
+                    <button><a href="index.php?list_users" class="nav-link text-light bg-info my-1">Danh Sách
+                            Users</a></button>
+                    <button><a href="logout.php" class="nav-link text-light bg-info my-1">Đăng Xuất</a></button>
                 </div>
             </div>
         </div>
@@ -99,6 +129,9 @@ include('../functions/common_function.php');
             <?php 
             if(isset($_GET['insert_category'])){
                 include('insert_categories.php');
+            }
+            if(isset($_GET['insert_product'])){
+                include('insert_product.php');
             }
             if(isset($_GET['insert_brand'])){
                 include('insert_brands.php');
@@ -111,6 +144,39 @@ include('../functions/common_function.php');
             }
             if(isset($_GET['hide_product'])){
                 include('hide_product.php');
+            }
+            if(isset($_GET['view_categories'])){
+                include('view_categories.php');
+            }
+            if(isset($_GET['view_brands'])){
+                include('view_brands.php');
+            }
+            if(isset($_GET['edit_category'])){
+                include('edit_category.php');
+            }
+            if(isset($_GET['edit_brands'])){
+                include('edit_brands.php');
+            }
+            if(isset($_GET['delete_category'])){
+                include('delete_category.php');
+            }
+            if(isset($_GET['delete_brands'])){
+                include('delete_brands.php');
+            }
+            if(isset($_GET['list_orders'])){
+                include('list_orders.php');
+            }
+            if(isset($_GET['delete_orders'])){
+                include('delete_orders.php');
+            }
+            if(isset($_GET['list_payments'])){
+                include('list_payments.php');
+            }
+            if(isset($_GET['delete_payments'])){
+                include('delete_payments.php');
+            }
+            if(isset($_GET['list_users'])){
+                include('list_users.php');
             }
             ?>
         </div>

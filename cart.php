@@ -59,7 +59,10 @@ update_cart();
         padding: 10px;
         display: flex;
         align-items: center;
-
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
     }
 
     .navbar a {
@@ -73,13 +76,15 @@ update_cart();
     }
 
     .container {
-        margin: 20px auto;
-        max-width: 80%;
+        margin: 130px auto 20px;
+        /* Thêm khoảng cách trên để tránh việc bị navbar che khuất */
+        max-width: 85%;
         background: white;
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+
 
     h3,
     p {
